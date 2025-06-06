@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Filtrar Filas</title></head>
+<body>
+    <h2>Filtrar filas por condición</h2>
+    <form method="POST">
+        <label>Columna:</label>
+        <select name="columna">
+            {% for col in columnas %}
+            <option value="{{ col }}">{{ col }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Operador:</label>
+        <select name="operador">
+            {% for op in operadores %}
+            <option value="{{ op }}">{{ op }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Valor:</label>
+        <input type="text" name="valor"><br><br>
+
+        <button type="submit">Filtrar</button>
+    </form>
+    <a href="/">← Volver</a>
+</body>
+</html>

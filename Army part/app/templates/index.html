@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>App Pandas</title></head>
+<body>
+    <h2>1 - Cargar CSV</h2>
+    <form action="/cargar_csv" method="POST" enctype="multipart/form-data">
+        <input type="file" name="archivo">
+        <button type="submit">Subir CSV</button>
+    </form>
+    <h2>2.6 - Descripción del Dataset</h2>
+    <form action="/descripcion" method="GET">
+        <button type="submit">Mostrar descripción</button>
+    </form>
+    <h2>3.1 - Seleccionar una columna</h2>
+<form action="/seleccionar_una_columna" method="GET">
+    <button type="submit">Ir</button>
+</form>
+<h2>3.2 - Seleccionar varias columnas</h2>
+<form action="/seleccionar_varias_columnas" method="GET">
+    <button type="submit">Ir</button>
+</form>
+<h2>4.1 - Filtrar filas con condición</h2>
+<form action="/filtrar_filas" method="GET">
+    <button type="submit">Ir</button>
+</form>
+</body>
+</html>

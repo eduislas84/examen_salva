@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>Seleccionar Varias Columnas</title></head>
+<body>
+    <h2>Seleccionar varias columnas</h2>
+    <form method="POST">
+        {% for col in columnas %}
+        <input type="checkbox" name="columnas" value="{{ col }}"> {{ col }}<br>
+        {% endfor %}
+        <button type="submit">Ver</button>
+    </form>
+    <a href="/">← Volver</a>
+</body>
+</html>
