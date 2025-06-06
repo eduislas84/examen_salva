@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App de Pandas</title>
+</head>
+<body>
+    <h1>Aplicación de Análisis con Pandas</h1>
+
+    <form action="/cargar_csv" method="POST" enctype="multipart/form-data">
+        <input type="file" name="archivo">
+        <button type="submit">1.1 Cargar CSV</button>
+    </form>
+
+    <form action="/head" method="GET"><button>2.1 Mostrar primeros N</button></form>
+    <form action="/tail" method="GET"><button>2.2 Mostrar últimos N</button></form>
+    <form action="/info" method="GET"><button>2.3 Info básica</button></form>
+    <form action="/columnas" method="GET"><button>2.4 Lista columnas</button></form>
+    <form action="/forma" method="GET"><button>2.5 Forma del dataset</button></form>
+
+    <div>
+        <h2>Resultado:</h2>
+        {{ resultado|safe }}
+    </div>
+</body>
+</html>
