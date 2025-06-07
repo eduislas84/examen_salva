@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DataApp - Visualizador CSV</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Menú principal">
+    <div class="logo">📊 DataApp</div>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">&#9776;</button>
+    <ul class="nav-menu" id="nav-menu">
+      <li class="nav-item" tabindex="0">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Carga de datos ▼</button>
+        <ul class="dropdown-content" role="menu" aria-label="Carga de datos">
+          <li role="menuitem" tabindex="0" onclick="showSection('carga')">📂 Cargar archivo CSV</li>
+        </ul>
+      </li>
+      <li class="nav-item" tabindex="0">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Preparación de datos ▼</button>
+        <ul class="dropdown-content" role="menu" aria-label="Preparación de datos">
+          <li role="menuitem" tabindex="0" onclick="showSection('top')">🔝 Mostrar primeros N registros</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('bottom')">🔻 Mostrar últimos N registros</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('info')">🧾 Información básica del CSV</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('columnas')">📑 Lista de columnas</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('forma')">📐 Forma del dataset</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('descripcion')">📈 Descripción del dataset</li>
+        </ul>
+      </li>
+      <li class="nav-item" tabindex="0">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Selección de datos ▼</button>
+        <ul class="dropdown-content" role="menu" aria-label="Selección de datos">
+          <li role="menuitem" tabindex="0" onclick="showSection('unaCol')">📌 Seleccionar una columna</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('variasCol')">📋 Seleccionar varias columnas</li>
+        </ul>
+      </li>
+      <li class="nav-item" tabindex="0">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Filtrar filas ▼</button>
+        <ul class="dropdown-content" role="menu" aria-label="Filtrar filas">
+          <li role="menuitem" tabindex="0" onclick="showSection('filtro')">🔍 Filtrar filas con condición</li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section id="carga" class="hidden">
+      <h2>📂 Cargar archivo CSV</h2>
+      <input type="file" accept=".csv" />
+      <button>Cargar</button>
+    </section>
+    <section id="top" class="hidden">
+      <h2>🔝 Mostrar primeros N registros</h2>
+      <input type="number" placeholder="Ej: 5 para mostrar los primeros 5 registros" />
+      <button>Mostrar</button>
+    </section>
+    <section id="bottom" class="hidden">
+      <h2>🔻 Mostrar últimos N registros</h2>
+      <input type="number" placeholder="Ej: 5 para mostrar los últimos 5 registros" />
+      <button>Mostrar</button>
+    </section>
+    <section id="info" class="hidden">
+      <h2>🧾 Información básica del CSV</h2>
+      <p>Aquí va la información básica del CSV cargado...</p>
+    </section>
+    <section id="columnas" class="hidden">
+      <h2>📑 Lista de columnas</h2>
+      <p>Aquí se listan las columnas del CSV cargado...</p>
+    </section>
+    <section id="forma" class="hidden">
+      <h2>📐 Forma del dataset</h2>
+      <p>Aquí se muestra la forma (filas y columnas) del dataset...</p>
+    </section>
+    <section id="descripcion" class="hidden">
+      <h2>📈 Descripción del dataset</h2>
+      <p>Aquí va la descripción estadística del dataset...</p>
+    </section>
+    <section id="unaCol" class="hidden">
+      <h2>📌 Seleccionar una columna</h2>
+      <input type="text" placeholder="Ej: nombre_columna" />
+      <button>Seleccionar</button>
+    </section>
+    <section id="variasCol" class="hidden">
+      <h2>📋 Seleccionar varias columnas</h2>
+      <input type="text" placeholder="Ej: columna1, columna2, columna3" />
+      <button>Seleccionar</button>
+    </section>
+    <section id="filtro" class="hidden">
+      <h2>🔍 Filtrar filas con condición</h2>
+      <input type="text" placeholder="Ej: columna > 100 (usa >, < o ==)" />
+      <button>Filtrar</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
