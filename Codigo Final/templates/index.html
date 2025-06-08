@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DataApp - Visualizador CSV</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">📊 DataApp</div>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">&#9776;</button>
+    <ul class="nav-menu" id="nav-menu">
+      <li class="nav-item" tabindex="0">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Carga de datos ▼</button>
+        <ul class="dropdown-content" role="menu" aria-label="Carga de datos">
+          <li role="menuitem" tabindex="0" onclick="showSection('carga')">📂 Cargar archivo CSV</li>
+        </ul>
+      </li>
+      <li class="nav-item" tabindex="0">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Preparación de datos ▼</button>
+        <ul class="dropdown-content" role="menu" aria-label="Preparación de datos">
+          <li role="menuitem" tabindex="0" onclick="showSection('top')">🔝 Mostrar primeros N registros</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('bottom')">🔻 Mostrar últimos N registros</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('info')">🧾 Información básica del CSV</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('columnas')">📑 Lista de columnas</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('forma')">📐 Forma del dataset</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('descripcion')">📈 Descripción del dataset</li>
+        </ul>
+      </li>
+      <li class="nav-item" tabindex="0">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Selección de datos ▼</button>
+        <ul class="dropdown-content" role="menu" aria-label="Selección de datos">
+          <li role="menuitem" tabindex="0" onclick="showSection('unaCol')">📌 Seleccionar una columna</li>
+          <li role="menuitem" tabindex="0" onclick="showSection('variasCol')">📋 Seleccionar varias columnas</li>
+        </ul>
+      </li>
+      <li class="nav-item" tabindex="0">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Filtrar filas ▼</button>
+        <ul class="dropdown-content" role="menu" aria-label="Filtrar filas">
+          <li role="menuitem" tabindex="0" onclick="showSection('filtro')">🔍 Filtrar filas con condición</li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Secciones con visibilidad controlada por Flask -->
+    <section id="carga" class="{% if seccion != 'carga' %}hidden{% endif %}">
+      <h2>📂 Cargar archivo CSV</h2>
+      <form action="/cargar_csv" method="POST" enctype="multipart/form-data">
+        <input type="file" name="archivo" accept=".csv" required />
+        <button type="submit">Cargar</button>
+      </form>
+    </section>
+
+    <section id="top" class="{% if seccion != 'top' %}hidden{% endif %}">
+      <h2>🔝 Mostrar primeros N registros</h2>
+      <form action="/head" method="POST">
+        <input type="number" name="n" placeholder="Ej: 5" required />
+        <button type="submit">Mostrar</button>
+      </form>
+    </section>
+
+    <section id="bottom" class="{% if seccion != 'bottom' %}hidden{% endif %}">
+      <h2>🔻 Mostrar últimos N registros</h2>
+      <form action="/tail" method="POST">
+        <input type="number" name="n" placeholder="Ej: 5" required />
+        <button type="submit">Mostrar</button>
+      </form>
+    </section>
+
+    <section id="info" class="{% if seccion != 'info' %}hidden{% endif %}">
+      <h2>🧾 Información básica del CSV</h2>
+      <form action="/info" method="GET">
+        <button type="submit">Mostrar</button>
+      </form>
+    </section>
+
+    <section id="columnas" class="{% if seccion != 'columnas' %}hidden{% endif %}">
+      <h2>📑 Lista de columnas</h2>
+      <form action="/columnas" method="GET">
+        <button type="submit">Mostrar</button>
+      </form>
+    </section>
+
+    <section id="forma" class="{% if seccion != 'forma' %}hidden{% endif %}">
+      <h2>📐 Forma del dataset</h2>
+      <form action="/forma" method="GET">
+        <button type="submit">Mostrar</button>
+      </form>
+    </section>
+
+    <section id="descripcion" class="{% if seccion != 'descripcion' %}hidden{% endif %}">
+      <h2>📈 Descripción del dataset</h2>
+      <form action="/descripcion" method="GET">
+        <button type="submit">Mostrar</button>
+      </form>
+    </section>
+
+    <section id="unaCol" class="{% if seccion != 'unaCol' %}hidden{% endif %}">
+      <h2>📌 Seleccionar una columna</h2>
+      <form action="/columna" method="POST">
+        <input type="text" name="columna" placeholder="Ej: edad" required />
+        <button type="submit">Seleccionar</button>
+      </form>
+    </section>
+
+    <section id="variasCol" class="{% if seccion != 'variasCol' %}hidden{% endif %}">
+      <h2>📋 Seleccionar varias columnas</h2>
+      <form action="/columnas_n" method="POST">
+        <input type="text" name="columnas" placeholder="Ej: edad, nombre" required />
+        <button type="submit">Seleccionar</button>
+      </form>
+    </section>
+
+    <section id="filtro" class="{% if seccion != 'filtro' %}hidden{% endif %}">
+      <h2>🔍 Filtrar filas con condición</h2>
+      <form action="/filtrar" method="POST">
+        <input type="text" name="condicion" placeholder="Ej: edad > 30" required />
+        <button type="submit">Filtrar</button>
+      </form>
+    </section>
+
+    {% if resultado %}
+    <section id="resultado">
+      <h2>📊 Resultado</h2>
+      <div>{{ resultado|safe }}</div>
+    </section>
+    {% endif %}
+
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const seccionActiva = "{{ seccion | default('') }}";
+    if (seccionActiva) showSection(seccionActiva);
+  });
+</script>
+</body>
+</html>
